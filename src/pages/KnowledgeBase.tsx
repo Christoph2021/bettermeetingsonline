@@ -4,9 +4,6 @@ import { categories, tips, type Tip } from "@/data/knowledge-base";
 import {
   ClipboardList,
   Users,
-  CheckCircle,
-  Monitor,
-  Heart,
   ChevronDown,
   ChevronUp,
 } from "lucide-react";
