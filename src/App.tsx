@@ -5,6 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index";
 import ToolCoach from "./pages/ToolCoach";
 import ToolPrep from "./pages/ToolPrep";
+import ToolCostClock from "./pages/ToolCostClock";
 import KnowledgeBase from "./pages/KnowledgeBase";
 import About from "./pages/About";
 import Contact from "./pages/Contact";

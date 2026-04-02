@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { MessageCircle, FileText, BookOpen, Info, Mail } from "lucide-react";
+import { MessageCircle, FileText, BookOpen, Info, Mail, Clock } from "lucide-react";
 
 interface ToolCardProps {
   title: string;
