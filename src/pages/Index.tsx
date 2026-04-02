@@ -65,6 +65,12 @@ const Index = () => {
             onClick={() => navigate("/tool/prep")}
           />
           <ToolCard
+            title="Meeting Cost Clock"
+            description="Create focus through cost awareness"
+            icon={<Clock className="h-5 w-5 text-primary" />}
+            onClick={() => navigate("/tool/cost-clock")}
+          />
+          <ToolCard
             title="Knowledge Base"
             description="Browse practical tips for better meetings"
             icon={<BookOpen className="h-5 w-5 text-primary" />}
