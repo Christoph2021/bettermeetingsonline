@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { MessageCircle, FileText, BookOpen, Info, Mail } from "lucide-react";
+import { MessageCircle, FileText, BookOpen, Info, Mail, Clock } from "lucide-react";
 
 interface ToolCardProps {
   title: string;
@@ -63,6 +63,12 @@ const Index = () => {
             description="Generate structured agendas and preparation steps"
             icon={<FileText className="h-5 w-5 text-primary" />}
             onClick={() => navigate("/tool/prep")}
+          />
+          <ToolCard
+            title="Meeting Cost Clock"
+            description="Create focus through cost awareness"
+            icon={<Clock className="h-5 w-5 text-primary" />}
+            onClick={() => navigate("/tool/cost-clock")}
           />
           <ToolCard
             title="Knowledge Base"
