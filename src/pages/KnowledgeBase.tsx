@@ -11,9 +11,6 @@ import {
 const iconMap: Record<string, React.ReactNode> = {
   ClipboardList: <ClipboardList className="h-4 w-4" />,
   Users: <Users className="h-4 w-4" />,
-  CheckCircle: <CheckCircle className="h-4 w-4" />,
-  Monitor: <Monitor className="h-4 w-4" />,
-  Heart: <Heart className="h-4 w-4" />,
 };
 
 const TipCard = ({ tip }: { tip: Tip }) => {
