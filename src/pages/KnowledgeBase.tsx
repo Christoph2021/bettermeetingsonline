@@ -7,6 +7,7 @@ import {
   CheckCircle,
   Monitor,
   Heart,
+  Clock,
   ChevronDown,
   ChevronUp,
 } from "lucide-react";
@@ -17,11 +18,12 @@ const iconMap: Record<string, React.ReactNode> = {
   CheckCircle: <CheckCircle className="h-4 w-4" />,
   Monitor: <Monitor className="h-4 w-4" />,
   Heart: <Heart className="h-4 w-4" />,
+  Clock: <Clock className="h-4 w-4" />,
 };
 
 const TipCard = ({ tip }: { tip: Tip }) => {
   const [open, setOpen] = useState(false);
-  const cat = categories.find((c) => c.id === tip.category);
+  const tipCategories = categories.filter((c) => tip.categories.includes(c.id));
 
   return (
     <div className="rounded-xl border bg-card p-5 shadow-card transition-shadow hover:shadow-card-hover">
@@ -30,10 +32,14 @@ const TipCard = ({ tip }: { tip: Tip }) => {
         className="w-full text-left flex items-start justify-between gap-3"
       >
         <div className="flex-1 min-w-0">
-          <span className="inline-flex items-center gap-1.5 text-xs font-medium text-primary mb-2">
-            {cat && iconMap[cat.icon]}
-            {cat?.label}
-          </span>
+          <div className="flex flex-wrap items-center gap-2 mb-2">
+            {tipCategories.map((cat) => (
+              <span key={cat.id} className="inline-flex items-center gap-1.5 text-xs font-medium text-primary">
+                {iconMap[cat.icon]}
+                {cat.label}
+              </span>
+            ))}
+          </div>
           <h3 className="text-base font-semibold text-foreground leading-snug mb-1">
             {tip.title}
           </h3>
@@ -58,7 +64,7 @@ const KnowledgeBase = () => {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
   const filtered = activeCategory
-    ? tips.filter((t) => t.category === activeCategory)
+    ? tips.filter((t) => t.categories.includes(activeCategory))
     : tips;
 
   return (
