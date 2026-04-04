@@ -2,17 +2,56 @@ import { useState } from "react";
 import StandardLayout from "@/components/StandardLayout";
 import { toast } from "sonner";
 
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
+
 const Contact = () => {
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
+  const [loading, setLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success("Thanks for reaching out! We'll get back to you soon.");
-    setForm({ name: "", email: "", subject: "", message: "" });
+    setLoading(true);
+    try {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (res.ok) {
+        setSubmitted(true);
+        setForm({ name: "", email: "", subject: "", message: "" });
+      } else {
+        toast.error("Something went wrong. Please try again.");
+      }
+    } catch {
+      toast.error("Network error. Please check your connection.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const update = (field: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
     setForm((prev) => ({ ...prev, [field]: e.target.value }));
+
+  if (submitted) {
+    return (
+      <StandardLayout>
+        <div className="max-w-lg">
+          <h1 className="text-3xl md:text-4xl font-bold mb-3">Thank You!</h1>
+          <p className="text-muted-foreground mb-6">
+            Your message has been sent. We'll get back to you soon.
+          </p>
+          <button
+            onClick={() => setSubmitted(false)}
+            className="rounded-lg bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground hover:opacity-90 transition-opacity"
+          >
+            Send Another Message
+          </button>
+        </div>
+      </StandardLayout>
+    );
+  }
 
   return (
     <StandardLayout>
@@ -50,9 +89,10 @@ const Contact = () => {
           </div>
           <button
             type="submit"
-            className="rounded-lg bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground hover:opacity-90 transition-opacity"
+            disabled={loading}
+            className="rounded-lg bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground hover:opacity-90 transition-opacity disabled:opacity-50"
           >
-            Send Message
+            {loading ? "Sending…" : "Send Message"}
           </button>
         </form>
       </div>
