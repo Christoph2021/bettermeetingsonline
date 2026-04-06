@@ -3,7 +3,7 @@ import ToolLayout from "@/components/ToolLayout";
 const About = () => (
   <ToolLayout title="About BetterMeetings.Online">
     <div className="max-w-2xl">
-      <h1 className="text-3xl md:text-4xl font-bold mb-6">About BetterMeetings.Online</h1>
+      
       <section className="mb-10">
         <p className="text-muted-foreground leading-relaxed mb-4">
           Whenever a form of communication becomes easy, we put less effort into it and a good thing turns bad. We've seen this with emails, chats, social media posts and yes, with meetings as well.
