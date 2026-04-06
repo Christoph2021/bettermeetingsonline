@@ -2,7 +2,7 @@ import { useState } from "react";
 import StandardLayout from "@/components/StandardLayout";
 import { toast } from "sonner";
 
-const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/mnjowary";
 
 const Contact = () => {
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
