@@ -1,5 +1,5 @@
 import { useState } from "react";
-import StandardLayout from "@/components/StandardLayout";
+import ToolLayout from "@/components/ToolLayout";
 import { categories, tips, type Tip } from "@/data/knowledge-base";
 import {
   ClipboardList,
@@ -68,9 +68,9 @@ const KnowledgeBase = () => {
     : tips;
 
   return (
-    <StandardLayout>
+    <ToolLayout title="Knowledge Base">
       <div className="max-w-3xl">
-        <h1 className="text-3xl md:text-4xl font-bold mb-2">Knowledge Base</h1>
+        
         <p className="text-muted-foreground mb-8">
           Practical tips to prepare, run, and follow up on meetings that actually matter.
         </p>
@@ -112,7 +112,7 @@ const KnowledgeBase = () => {
           ))}
         </div>
       </div>
-    </StandardLayout>
+    </ToolLayout>
   );
 };
 

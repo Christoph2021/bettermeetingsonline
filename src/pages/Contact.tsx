@@ -1,5 +1,5 @@
 import { useState } from "react";
-import StandardLayout from "@/components/StandardLayout";
+import ToolLayout from "@/components/ToolLayout";
 import { toast } from "sonner";
 import { CheckCircle, Home } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -82,7 +82,7 @@ const Contact = () => {
 
   if (submitted) {
     return (
-      <StandardLayout>
+      <ToolLayout title="Contact Us">
         <div className="max-w-lg flex flex-col items-center text-center animate-fade-in">
           <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mb-6 animate-scale-in">
             <CheckCircle className="w-10 h-10 text-primary" />
@@ -99,7 +99,7 @@ const Contact = () => {
             Back to Home
           </button>
         </div>
-      </StandardLayout>
+      </ToolLayout>
     );
   }
 
@@ -111,9 +111,9 @@ const Contact = () => {
     }`;
 
   return (
-    <StandardLayout>
+    <ToolLayout title="Contact Us">
       <div className="max-w-lg">
-        <h1 className="text-3xl md:text-4xl font-bold mb-3">Contact Us</h1>
+        
         <p className="text-muted-foreground mb-8">
           Have a meeting tip to share or just want to say hi? Drop us a line.
         </p>
@@ -165,7 +165,7 @@ const Contact = () => {
           </button>
         </form>
       </div>
-    </StandardLayout>
+    </ToolLayout>
   );
 };
 
