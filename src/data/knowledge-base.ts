@@ -158,10 +158,10 @@ Finally, every book has a conclusion that ties everything together. In a meeting
     title: `Easily awaken Collaboration and Participation with a Virtual Whiteboard`,
     summary: `Use a virtual whiteboard to visualize important parts of the conversation and allow attendees to participate in the conversation asynchronously.`,
     body: `Vision is the primary sense for most people. Utilizing a virtual whiteboard to visually represent thoughts, decisions, information, and their connections is a powerful tool. It enhances meetings in numerous ways.\n
-1. Keeps everyone on track \n
+1. Keeps everyone on track <br /><br />
 
 It's easy to lose focus during meetings, especially virtual ones. A whiteboard helps distracted participants re-engage and catch up quickly. When used as a key facilitation tool, the whiteboard can also visually track meeting progress by outlining the agenda steps.
-2. Sparks thoughts through visualization \n
+2. Sparks thoughts through visualization <br /><br />
 
 A conversation typically unfolds in a linear fashion, resulting in the present thought from everything previously discussed. A whiteboard transforms this linear exchange into a two-dimensional space. Instead of thinking in terms of now and before, participants see information as points on the board, making it easier to draw connections. Ideas shared at the start of the meeting can be linked effortlessly with those from the end because, on the whiteboard, they are not separated by 50 minutes but only a few pixels.
 3. Allows for deeper engagement \n
