@@ -91,11 +91,11 @@ const Contact = () => {
             Thank you for reaching out. We'll review your message and get back to you as soon as possible.
           </p>
           <button
-            onClick={() => setSubmitted(false)}
+            onClick={() => navigate("/")}
             className="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground hover:opacity-90 transition-opacity hover-scale"
           >
-            <ArrowLeft className="w-4 h-4" />
-            Send Another Message
+            <Home className="w-4 h-4" />
+            Back to Home
           </button>
         </div>
       </StandardLayout>
