@@ -17,6 +17,7 @@ const contactSchema = z.object({
 type FormErrors = Partial<Record<keyof z.infer<typeof contactSchema>, string>>;
 
 const Contact = () => {
+  const navigate = useNavigate();
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
   const [errors, setErrors] = useState<FormErrors>({});
   const [touched, setTouched] = useState<Set<string>>(new Set());
