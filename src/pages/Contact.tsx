@@ -1,7 +1,8 @@
 import { useState } from "react";
 import StandardLayout from "@/components/StandardLayout";
 import { toast } from "sonner";
-import { CheckCircle, ArrowLeft } from "lucide-react";
+import { CheckCircle, Home } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/mnjowary";
@@ -16,6 +17,7 @@ const contactSchema = z.object({
 type FormErrors = Partial<Record<keyof z.infer<typeof contactSchema>, string>>;
 
 const Contact = () => {
+  const navigate = useNavigate();
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
   const [errors, setErrors] = useState<FormErrors>({});
   const [touched, setTouched] = useState<Set<string>>(new Set());
@@ -90,11 +92,11 @@ const Contact = () => {
             Thank you for reaching out. We'll review your message and get back to you as soon as possible.
           </p>
           <button
-            onClick={() => setSubmitted(false)}
+            onClick={() => navigate("/")}
             className="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground hover:opacity-90 transition-opacity hover-scale"
           >
-            <ArrowLeft className="w-4 h-4" />
-            Send Another Message
+            <Home className="w-4 h-4" />
+            Back to Home
           </button>
         </div>
       </StandardLayout>
