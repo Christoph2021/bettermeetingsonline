@@ -1,6 +1,7 @@
 import { useState } from "react";
 import StandardLayout from "@/components/StandardLayout";
 import { toast } from "sonner";
+import { CheckCircle, ArrowLeft } from "lucide-react";
 
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/mnjowary";
 
@@ -37,15 +38,19 @@ const Contact = () => {
   if (submitted) {
     return (
       <StandardLayout>
-        <div className="max-w-lg">
-          <h1 className="text-3xl md:text-4xl font-bold mb-3">Thank You!</h1>
-          <p className="text-muted-foreground mb-6">
-            Your message has been sent. We'll get back to you soon.
+        <div className="max-w-lg flex flex-col items-center text-center animate-fade-in">
+          <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mb-6 animate-scale-in">
+            <CheckCircle className="w-10 h-10 text-primary" />
+          </div>
+          <h1 className="text-3xl md:text-4xl font-bold mb-3">Message Sent!</h1>
+          <p className="text-muted-foreground mb-8 max-w-md">
+            Thank you for reaching out. We'll review your message and get back to you as soon as possible.
           </p>
           <button
             onClick={() => setSubmitted(false)}
-            className="rounded-lg bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground hover:opacity-90 transition-opacity"
+            className="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground hover:opacity-90 transition-opacity hover-scale"
           >
+            <ArrowLeft className="w-4 h-4" />
             Send Another Message
           </button>
         </div>
