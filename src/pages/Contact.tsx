@@ -1,7 +1,8 @@
 import { useState } from "react";
 import StandardLayout from "@/components/StandardLayout";
 import { toast } from "sonner";
-import { CheckCircle, ArrowLeft } from "lucide-react";
+import { CheckCircle, Home } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/mnjowary";
