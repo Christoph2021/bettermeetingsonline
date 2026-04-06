@@ -113,7 +113,7 @@ const Contact = () => {
   return (
     <ToolLayout title="Contact Us">
       <div className="max-w-lg">
-        <h1 className="text-3xl md:text-4xl font-bold mb-3">Contact Us</h1>
+        
         <p className="text-muted-foreground mb-8">
           Have a meeting tip to share or just want to say hi? Drop us a line.
         </p>
