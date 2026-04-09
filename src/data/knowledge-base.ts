@@ -182,7 +182,7 @@ There are several virtual whiteboards available, but the one I highly recommend 
 
 Accountability is created through a social contract that depends on the agreement of all parties involved. Therefore, it is often more effective when meeting participants volunteer to take ownership of follow-up tasks rather than having owners assigned to them .
 
-This webinar offers valuable insights into establishing accountability through the lens of neuroscience: [The Neuroscience of Accountability: How to Nurture Ownership Within Healthcare Teams](https://www.youtube.com/watch?v=d0HyaO1Jv5w&t=3s)`,
+This webinar offers valuable insights into establishing accountability through the lens of neuroscience: [The Neuroscience of Accountability: How to Nurture Ownership Within Healthcare Teams](https://www.youtube.com/watch?v=d0HyaO1Jv5w)`,
   },
   {
     id: "new-7",
