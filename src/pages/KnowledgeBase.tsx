@@ -1,4 +1,5 @@
 import { useState } from "react";
+import ReactMarkdown from "react-markdown";
 import ToolLayout from "@/components/ToolLayout";
 import { categories, tips, type Tip } from "@/data/knowledge-base";
 import {
@@ -52,9 +53,19 @@ const TipCard = ({ tip }: { tip: Tip }) => {
         </span>
       </button>
       {open && (
-        <p className="mt-4 pt-4 border-t text-sm text-muted-foreground leading-relaxed">
-          {tip.body}
-        </p>
+        <div className="mt-4 pt-4 border-t text-sm text-muted-foreground leading-relaxed prose prose-sm prose-neutral dark:prose-invert max-w-none [&_a]:text-primary [&_a]:underline [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 [&_p]:mb-3 [&_li]:mb-1 [&_strong]:text-foreground">
+          <ReactMarkdown
+            components={{
+              a: ({ children, href, ...props }) => (
+                <a href={href} target="_blank" rel="noopener noreferrer" {...props}>
+                  {children}
+                </a>
+              ),
+            }}
+          >
+            {tip.body}
+          </ReactMarkdown>
+        </div>
       )}
     </div>
   );
