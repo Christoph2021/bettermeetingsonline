@@ -160,19 +160,15 @@ Finally, every book has a conclusion that ties everything together. In a meeting
     body: `Vision is the primary sense for most people. Utilizing a virtual whiteboard to visually represent thoughts, decisions, information, and their connections is a powerful tool. It enhances meetings in numerous ways.
 
 **1. Keeps everyone on track**
-
 It's easy to lose focus during meetings, especially virtual ones. A whiteboard helps distracted participants re-engage and catch up quickly. When used as a key facilitation tool, the whiteboard can also visually track meeting progress by outlining the agenda steps.
 
 **2. Sparks thoughts through visualization**
-
 A conversation typically unfolds in a linear fashion, resulting in the present thought from everything previously discussed. A whiteboard transforms this linear exchange into a two-dimensional space. Instead of thinking in terms of now and before, participants see information as points on the board, making it easier to draw connections. Ideas shared at the start of the meeting can be linked effortlessly with those from the end because, on the whiteboard, they are not separated by 50 minutes but only a few pixels.
 
 **3. Allows for deeper engagement**
-
 Statistically speaking, most meeting attendees are just listening. The larger the meeting, the larger the portion of attendees who are engaged with only that one sense. By sharing a screen or presentation, attendees are engaged in meetings with two senses: hearing and seeing. Both of them are passive. A virtual whiteboard adds a third way of engagement: doing. With their hands, through their devices, attendees create, edit, delete, move, connect, draw, etc. on the whiteboard for everyone else to see and react to.
 
 **4. Provides additional communication paths**
-
 For more insights on the advantages of offering multiple communication channels, read this tip: Better participation through multiple communication channels
 
 There are several virtual whiteboards available, but the one I highly recommend is [Miro](https://miro.com).`,
