@@ -11,16 +11,40 @@ interface Message {
   content: string;
 }
 
+const LINK_PLACEHOLDER = "\u0000LINK\u0000";
+
 function renderMarkdown(md: string): string {
-  // Basic markdown fallback
-  return md
+  const links: string[] = [];
+  const stash = (html: string) => {
+    links.push(html);
+    return `${LINK_PLACEHOLDER}${links.length - 1}${LINK_PLACEHOLDER}`;
+  };
+
+  let out = md;
+
+  // 1. Markdown links [text](url)
+  out = out.replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, (_m, text, url) =>
+    stash(`<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-primary underline">${text}</a>`)
+  );
+
+  // 2. Bare URLs
+  out = out.replace(/(https?:\/\/[^\s<]+[^\s<.,;:!?)\]'"])/g, (url) =>
+    stash(`<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-primary underline">${url}</a>`)
+  );
+
+  // 3. Escape remaining HTML
+  out = out
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
     .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
     .replace(/\*(.*?)\*/g, "<em>$1</em>")
-    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-primary underline">$1</a>')
     .replace(/\n/g, "<br>");
+
+  // 4. Restore links
+  out = out.replace(new RegExp(`${LINK_PLACEHOLDER}(\\d+)${LINK_PLACEHOLDER}`, "g"), (_m, i) => links[Number(i)]);
+
+  return out;
 }
 
 const TypingIndicator = () => (
@@ -51,6 +75,13 @@ const ChatBubble = ({ message }: { message: Message }) => {
         </div>
         <div
           className="text-sm leading-relaxed [&_a]:text-primary [&_a]:underline"
+          onClick={(e) => {
+            const target = (e.target as HTMLElement).closest("a");
+            if (target instanceof HTMLAnchorElement && target.href) {
+              e.preventDefault();
+              window.open(target.href, "_blank", "noopener,noreferrer");
+            }
+          }}
           dangerouslySetInnerHTML={{ __html: renderMarkdown(message.content) }}
         />
       </div>
