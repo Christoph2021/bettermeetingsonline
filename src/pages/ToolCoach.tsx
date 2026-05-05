@@ -75,6 +75,13 @@ const ChatBubble = ({ message }: { message: Message }) => {
         </div>
         <div
           className="text-sm leading-relaxed [&_a]:text-primary [&_a]:underline"
+          onClick={(e) => {
+            const target = (e.target as HTMLElement).closest("a");
+            if (target instanceof HTMLAnchorElement && target.href) {
+              e.preventDefault();
+              window.open(target.href, "_blank", "noopener,noreferrer");
+            }
+          }}
           dangerouslySetInnerHTML={{ __html: renderMarkdown(message.content) }}
         />
       </div>
