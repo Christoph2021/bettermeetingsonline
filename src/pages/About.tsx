@@ -1,4 +1,5 @@
 import ToolLayout from "@/components/ToolLayout";
+import christophHammer from "@/assets/christoph-hammer.jpg";
 
 const About = () => (
   <ToolLayout title="About BetterMeetings.Online">
@@ -17,6 +18,11 @@ const About = () => (
       </section>
       <section>
         <h2 className="text-xl font-semibold mb-4 text-foreground">About Me</h2>
+        <img
+          src={christophHammer}
+          alt="Christoph Hammer, founder of BetterMeetings.Online"
+          className="float-right ml-6 mb-4 w-40 md:w-48 rounded-lg shadow-card"
+        />
         <p className="text-muted-foreground leading-relaxed mb-4">
           With more than 20 years of experience leading teams and organizations, I've learned a simple truth: organizational momentum rises and falls with meeting culture.
         </p>
