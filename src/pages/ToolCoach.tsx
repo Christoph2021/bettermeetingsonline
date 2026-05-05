@@ -12,6 +12,20 @@ interface Message {
 }
 
 const LINK_PLACEHOLDER = "\u0000LINK\u0000";
+const SITE_BASE = "https://bettermeetings.online";
+
+function normalizeUrl(url: string): string {
+  const trimmed = url.trim();
+  if (/^https?:\/\//i.test(trimmed)) return trimmed;
+  if (/^mailto:|^tel:/i.test(trimmed)) return trimmed;
+  if (trimmed.startsWith("//")) return `https:${trimmed}`;
+  if (trimmed.startsWith("/")) return `${SITE_BASE}${trimmed}`;
+  if (/^www\./i.test(trimmed)) return `https://${trimmed}`;
+  // bare domain like example.com or example.com/path
+  if (/^[a-z0-9-]+(\.[a-z0-9-]+)+(\/|$)/i.test(trimmed)) return `https://${trimmed}`;
+  // relative path (e.g. "page" or "page/sub")
+  return `${SITE_BASE}/${trimmed.replace(/^\.?\/?/, "")}`;
+}
 
 function renderMarkdown(md: string): string {
   const links: string[] = [];
@@ -22,17 +36,25 @@ function renderMarkdown(md: string): string {
 
   let out = md;
 
-  // 1. Markdown links [text](url)
-  out = out.replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, (_m, text, url) =>
-    stash(`<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-primary underline">${text}</a>`)
-  );
+  // 1. Markdown links [text](url) — accept any url, normalize later
+  out = out.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (_m, text, url) => {
+    const href = normalizeUrl(url);
+    return stash(`<a href="${href}" target="_blank" rel="noopener noreferrer" class="text-primary underline">${text}</a>`);
+  });
 
-  // 2. Bare URLs
-  out = out.replace(/(https?:\/\/[^\s<]+[^\s<.,;:!?)\]'"])/g, (url) =>
-    stash(`<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-primary underline">${url}</a>`)
-  );
+  // 2. Bare http(s) URLs
+  out = out.replace(/(https?:\/\/[^\s<]+[^\s<.,;:!?)\]'"])/g, (url) => {
+    const href = normalizeUrl(url);
+    return stash(`<a href="${href}" target="_blank" rel="noopener noreferrer" class="text-primary underline">${url}</a>`);
+  });
 
-  // 3. Escape remaining HTML
+  // 3. Bare www. URLs
+  out = out.replace(/(^|[\s(])(www\.[^\s<]+[^\s<.,;:!?)\]'"])/g, (_m, pre, url) => {
+    const href = normalizeUrl(url);
+    return `${pre}${stash(`<a href="${href}" target="_blank" rel="noopener noreferrer" class="text-primary underline">${url}</a>`)}`;
+  });
+
+  // 4. Escape remaining HTML and apply formatting
   out = out
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
@@ -41,7 +63,7 @@ function renderMarkdown(md: string): string {
     .replace(/\*(.*?)\*/g, "<em>$1</em>")
     .replace(/\n/g, "<br>");
 
-  // 4. Restore links
+  // 5. Restore links
   out = out.replace(new RegExp(`${LINK_PLACEHOLDER}(\\d+)${LINK_PLACEHOLDER}`, "g"), (_m, i) => links[Number(i)]);
 
   return out;
