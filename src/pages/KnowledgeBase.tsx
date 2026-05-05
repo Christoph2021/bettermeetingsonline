@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useRef, useEffect, forwardRef } from "react";
+import { useSearchParams } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import ToolLayout from "@/components/ToolLayout";
 import { categories, tips, type Tip } from "@/data/knowledge-base";
@@ -22,12 +23,13 @@ const iconMap: Record<string, React.ReactNode> = {
   Clock: <Clock className="h-4 w-4" />,
 };
 
-const TipCard = ({ tip }: { tip: Tip }) => {
-  const [open, setOpen] = useState(false);
-  const tipCategories = categories.filter((c) => tip.categories.includes(c.id));
+const TipCard = forwardRef<HTMLDivElement, { tip: Tip; isInitiallyExpanded?: boolean }>(
+  ({ tip, isInitiallyExpanded = false }, ref) => {
+    const [open, setOpen] = useState(isInitiallyExpanded);
+    const tipCategories = categories.filter((c) => tip.categories.includes(c.id));
 
-  return (
-    <div className="rounded-xl border bg-card p-5 shadow-card transition-shadow hover:shadow-card-hover">
+    return (
+      <div ref={ref} className="rounded-xl border bg-card p-5 shadow-card transition-shadow hover:shadow-card-hover">
       <button
         onClick={() => setOpen(!open)}
         className="w-full text-left flex items-start justify-between gap-3"
@@ -78,10 +80,23 @@ const TipCard = ({ tip }: { tip: Tip }) => {
       )}
     </div>
   );
-};
+}
+);
 
 const KnowledgeBase = () => {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const [searchParams] = useSearchParams();
+  const tipIdToExpand = searchParams.get("tip");
+  const tipRefs = useRef<Record<string, HTMLDivElement | null>>({});
+
+  // Scroll to expanded card when component mounts or tipIdToExpand changes
+  useEffect(() => {
+    if (tipIdToExpand && tipRefs.current[tipIdToExpand]) {
+      setTimeout(() => {
+        tipRefs.current[tipIdToExpand]?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 0);
+    }
+  }, [tipIdToExpand]);
 
   const filtered = activeCategory
     ? tips.filter((t) => t.categories.includes(activeCategory))
@@ -128,7 +143,14 @@ const KnowledgeBase = () => {
         {/* Tips list */}
         <div className="space-y-4">
           {filtered.map((tip) => (
-            <TipCard key={tip.id} tip={tip} />
+            <TipCard
+              key={tip.id}
+              tip={tip}
+              ref={(el) => {
+                if (el) tipRefs.current[tip.id] = el;
+              }}
+              isInitiallyExpanded={tipIdToExpand === tip.id}
+            />
           ))}
         </div>
       </div>
