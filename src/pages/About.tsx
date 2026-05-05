@@ -1,4 +1,5 @@
 import ToolLayout from "@/components/ToolLayout";
+import christophHammer from "@/assets/christoph-hammer.jpg";
 
 const About = () => (
   <ToolLayout title="About BetterMeetings.Online">
